@@ -1,0 +1,3007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KD's Place | Ikorodu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+
+      --green: #07833f;
+      --red: #e32626;
+
+      --bg: #f7f7f3;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #777;
+      --border: #e5e5e5;
+
+      --shadow: 0 12px 35px rgba(0, 0, 0, .08);
+    }
+
+    body.dark {
+
+      --bg: #101411;
+      --card: #181d19;
+      --text: #f5f5f5;
+      --muted: #aaa;
+      --border: #2b332d;
+
+      --shadow: 0 15px 40px rgba(0, 0, 0, .35);
+    }
+
+    body {
+
+      font-family: "Poppins", sans-serif;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      transition:
+        background .4s,
+        color .4s;
+
+      overflow-x: hidden;
+    }
+
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      height: 75px;
+
+      padding: 0 6%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      background: rgba(255, 255, 255, .9);
+
+      backdrop-filter: blur(15px);
+
+      z-index: 1000;
+
+      border-bottom: 1px solid var(--border);
+
+      transition: .4s;
+    }
+
+    body.dark .navbar {
+
+      background: rgba(16, 20, 17, .9);
+
+    }
+
+
+    .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-size: 22px;
+
+      font-weight: 800;
+    }
+
+    .logo-box {
+
+      width: 45px;
+      height: 45px;
+
+      border-radius: 50%;
+
+      background: white;
+
+      border: 4px solid var(--green);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .logo-box span {
+
+      position: relative;
+
+      z-index: 2;
+
+      color: var(--green);
+
+      font-weight: 900;
+    }
+
+    .logo-box::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 18px;
+
+      height: 60px;
+
+      right: -5px;
+
+      top: -8px;
+
+      background: var(--red);
+
+      transform: rotate(25deg);
+    }
+
+    .logo-text span {
+
+      color: var(--red);
+    }
+
+
+    /* NAV LINKS */
+
+    .nav-links {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 30px;
+    }
+
+    .nav-links a {
+
+      text-decoration: none;
+
+      color: var(--text);
+
+      font-weight: 500;
+
+      transition: .3s;
+    }
+
+    .nav-links a:hover {
+
+      color: var(--green);
+
+      transform: translateY(-3px);
+    }
+
+
+    /* NAV ACTIONS */
+
+    .nav-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+    }
+
+
+    /* DARK MODE */
+
+    .mode-toggle {
+
+      width: 44px;
+
+      height: 44px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: var(--card);
+
+      box-shadow: var(--shadow);
+
+      cursor: pointer;
+
+      font-size: 19px;
+
+      transition: .3s;
+    }
+
+    .mode-toggle:hover {
+
+      transform: rotate(25deg) scale(1.1);
+    }
+
+
+    /* CART */
+
+    .cart-button {
+
+      border: none;
+
+      background: var(--green);
+
+      color: white;
+
+      padding: 11px 16px;
+
+      border-radius: 30px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .cart-button:hover {
+
+      background: var(--red);
+
+      transform: translateY(-3px);
+    }
+
+    .cart-count {
+
+      background: white;
+
+      color: var(--green);
+
+      padding: 2px 7px;
+
+      border-radius: 20px;
+
+      margin-left: 5px;
+    }
+
+
+    /* MOBILE BUTTON */
+
+    .menu-btn {
+
+      display: none;
+
+      border: none;
+
+      background: none;
+
+      color: var(--text);
+
+      font-size: 27px;
+
+      cursor: pointer;
+    }
+
+
+    /* ================= HERO ================= */
+
+    .hero {
+
+      min-height: 720px;
+
+      padding: 140px 7% 80px;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 60px;
+
+      align-items: center;
+
+      background:
+
+        radial-gradient(circle at 80% 20%,
+          rgba(7, 131, 63, .15),
+          transparent 30%),
+
+        radial-gradient(circle at 15% 80%,
+          rgba(227, 38, 38, .1),
+          transparent 30%);
+    }
+
+    .hero-text {
+
+      animation: slideRight 1s ease;
+    }
+
+    .badge {
+
+      display: inline-block;
+
+      padding: 8px 16px;
+
+      border-radius: 30px;
+
+      background: rgba(7, 131, 63, .1);
+
+      color: var(--green);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+
+      font-size: clamp(45px, 6vw, 75px);
+
+      line-height: 1.05;
+
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+
+      color: var(--green);
+    }
+
+    .hero h1 strong {
+
+      color: var(--red);
+    }
+
+    .hero p {
+
+      color: var(--muted);
+
+      max-width: 550px;
+
+      line-height: 1.8;
+
+      font-size: 16px;
+    }
+
+    .hero-buttons {
+
+      display: flex;
+
+      gap: 15px;
+
+      margin-top: 30px;
+
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+
+      border: none;
+
+      background: var(--green);
+
+      color: white;
+
+      padding: 15px 25px;
+
+      border-radius: 12px;
+
+      font-weight: 700;
+
+      text-decoration: none;
+
+      display: inline-block;
+
+      cursor: pointer;
+
+      transition: .35s;
+    }
+
+    .primary-btn:hover {
+
+      background: var(--red);
+
+      transform: translateY(-5px);
+
+      box-shadow: 0 15px 30px rgba(227, 38, 38, .25);
+    }
+
+    .secondary-btn {
+
+      border: 2px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--text);
+
+      padding: 13px 24px;
+
+      border-radius: 12px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .secondary-btn:hover {
+
+      border-color: var(--green);
+
+      color: var(--green);
+
+      transform: translateY(-4px);
+    }
+
+
+    /* HERO IMAGE */
+
+    .hero-image {
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      position: relative;
+    }
+
+    .food-circle {
+
+      width: min(500px, 85vw);
+
+      height: min(500px, 85vw);
+
+      border-radius: 50%;
+
+      padding: 10px;
+
+      background:
+
+        linear-gradient(135deg,
+          var(--green),
+          var(--red));
+
+      animation: float 4s ease-in-out infinite;
+
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .2);
+    }
+
+    .food-circle img {
+
+      width: 100%;
+
+      height: 100%;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      border: 8px solid var(--card);
+    }
+
+    .floating-card {
+
+      position: absolute;
+
+      background: var(--card);
+
+      padding: 13px 18px;
+
+      border-radius: 14px;
+
+      box-shadow: var(--shadow);
+
+      font-weight: 700;
+
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .card-one {
+
+      top: 15%;
+
+      left: 0;
+    }
+
+    .card-two {
+
+      bottom: 15%;
+
+      right: 0;
+    }
+
+
+    /* ================= SECTIONS ================= */
+
+    .section {
+
+      padding: 90px 7%;
+    }
+
+    .section-heading {
+
+      text-align: center;
+
+      margin-bottom: 40px;
+    }
+
+    .section-heading h2 {
+
+      font-size: 40px;
+    }
+
+    .section-heading p {
+
+      color: var(--muted);
+
+      margin-top: 8px;
+    }
+
+
+    /* ================= SEARCH ================= */
+
+    .search-area {
+
+      display: flex;
+
+      justify-content: center;
+
+      margin-bottom: 25px;
+    }
+
+    .search {
+
+      width: min(650px, 100%);
+
+      padding: 16px 20px;
+
+      border-radius: 15px;
+
+      border: 1px solid var(--border);
+
+      background: var(--card);
+
+      color: var(--text);
+
+      outline: none;
+
+      font-family: inherit;
+
+      transition: .3s;
+    }
+
+    .search:focus {
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 4px rgba(7, 131, 63, .1);
+    }
+
+
+    /* ================= CATEGORIES ================= */
+
+    .categories {
+
+      display: flex;
+
+      gap: 10px;
+
+      overflow-x: auto;
+
+      padding: 10px 0 25px;
+
+      scrollbar-width: none;
+    }
+
+    .categories::-webkit-scrollbar {
+
+      display: none;
+    }
+
+    .category {
+
+      white-space: nowrap;
+
+      border: none;
+
+      background: var(--card);
+
+      color: var(--text);
+
+      padding: 11px 18px;
+
+      border-radius: 30px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .category:hover {
+
+      transform: translateY(-3px);
+    }
+
+    .category.active {
+
+      background: var(--green);
+
+      color: white;
+    }
+
+
+    /* ================= FOOD MENU ================= */
+
+    /* THIS IS NOW VERTICAL */
+
+    .food-container {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 22px;
+
+      width: 100%;
+
+      max-width: 950px;
+
+      margin: auto;
+    }
+
+
+    /* FOOD CARD */
+
+    .food-card {
+
+      width: 100%;
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      padding: 15px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 20px;
+
+      box-shadow: var(--shadow);
+
+      transition: .4s;
+
+      animation: foodAppear .6s ease;
+    }
+
+    .food-card:hover {
+
+      transform:
+        translateX(8px) translateY(-3px);
+
+      box-shadow:
+        0 20px 45px rgba(0, 0, 0, .15);
+    }
+
+    .food-img {
+
+      width: 190px;
+
+      height: 145px;
+
+      flex-shrink: 0;
+
+      overflow: hidden;
+
+      border-radius: 15px;
+
+      position: relative;
+    }
+
+    .food-img img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: .5s;
+    }
+
+    .food-card:hover .food-img img {
+
+      transform: scale(1.1);
+    }
+
+
+    /* FAVORITE */
+
+    .favorite {
+
+      position: absolute;
+
+      top: 10px;
+
+      right: 10px;
+
+      width: 37px;
+
+      height: 37px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: white;
+
+      cursor: pointer;
+
+      font-size: 18px;
+
+      transition: .3s;
+    }
+
+    .favorite:hover {
+
+      transform: scale(1.15);
+
+      color: var(--red);
+    }
+
+
+    /* FOOD INFO */
+
+    .food-info {
+
+      flex: 1;
+    }
+
+    .food-info h3 {
+
+      font-size: 21px;
+
+      margin-bottom: 6px;
+    }
+
+    .food-info p {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      max-width: 600px;
+    }
+
+    .food-bottom {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-top: 18px;
+    }
+
+    .price {
+
+      color: var(--green);
+
+      font-weight: 800;
+
+      font-size: 19px;
+    }
+
+    .add-btn {
+
+      width: 45px;
+
+      height: 45px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      color: white;
+
+      font-size: 24px;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .add-btn:hover {
+
+      background: var(--red);
+
+      transform:
+        rotate(90deg) scale(1.1);
+    }
+
+
+    /* ================= WHY KD ================= */
+
+    .features {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 20px;
+    }
+
+    .feature {
+
+      background: var(--card);
+
+      border: 1px solid var(--border);
+
+      border-radius: 20px;
+
+      padding: 28px 20px;
+
+      text-align: center;
+
+      transition: .4s;
+    }
+
+    .feature:hover {
+
+      transform: translateY(-10px);
+
+      box-shadow: var(--shadow);
+    }
+
+
+    /* SMALL PICTURE */
+
+    .feature-image {
+
+      width: 70px;
+
+      height: 70px;
+
+      margin: 0 auto 15px;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+    }
+
+    .feature-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: .4s;
+    }
+
+    .feature:hover .feature-image img {
+
+      transform: scale(1.15) rotate(3deg);
+    }
+
+    .feature h3 {
+
+      margin-bottom: 7px;
+    }
+
+    .feature p {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+
+    /* ================= FOOTER ================= */
+
+    footer {
+
+      background: #0c100d;
+
+      color: white;
+
+      padding: 60px 7%;
+    }
+
+    .footer-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        2fr 1fr 1fr;
+
+      gap: 40px;
+    }
+
+    footer p {
+
+      color: #aaa;
+
+      line-height: 1.8;
+    }
+
+    footer a {
+
+      display: block;
+
+      color: #aaa;
+
+      margin: 9px 0;
+
+      text-decoration: none;
+
+      transition: .3s;
+    }
+
+    footer a:hover {
+
+      color: white;
+
+      transform: translateX(5px);
+    }
+
+
+    /* ================= CART ================= */
+
+    .cart-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, .55);
+
+      backdrop-filter: blur(5px);
+
+      z-index: 2000;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: .3s;
+    }
+
+    .cart-overlay.open {
+
+      opacity: 1;
+
+      pointer-events: auto;
+    }
+
+    .cart-panel {
+
+      position: absolute;
+
+      right: 0;
+
+      top: 0;
+
+      width: min(450px, 100%);
+
+      height: 100%;
+
+      background: var(--card);
+
+      transform: translateX(100%);
+
+      transition: .4s;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .cart-overlay.open .cart-panel {
+
+      transform: translateX(0);
+    }
+
+    .cart-header {
+
+      padding: 25px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .close-cart {
+
+      width: 40px;
+
+      height: 40px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      cursor: pointer;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-size: 20px;
+    }
+
+    .cart-items {
+
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 20px;
+    }
+
+    .cart-item {
+
+      display: flex;
+
+      gap: 12px;
+
+      align-items: center;
+
+      margin-bottom: 20px;
+    }
+
+    .cart-item img {
+
+      width: 65px;
+
+      height: 65px;
+
+      object-fit: cover;
+
+      border-radius: 12px;
+    }
+
+    .cart-item-info {
+
+      flex: 1;
+    }
+
+    .cart-item-info h4 {
+
+      font-size: 14px;
+    }
+
+    .cart-item-info p {
+
+      color: var(--green);
+
+      font-weight: 700;
+    }
+
+    .qty {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      margin-top: 5px;
+    }
+
+    .qty button {
+
+      width: 25px;
+
+      height: 25px;
+
+      border: none;
+
+      border-radius: 6px;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      cursor: pointer;
+    }
+
+    .remove {
+
+      border: none;
+
+      background: none;
+
+      color: var(--red);
+
+      cursor: pointer;
+    }
+
+    .cart-bottom {
+
+      padding: 25px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .total-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      font-size: 21px;
+
+      font-weight: 800;
+
+      margin-bottom: 20px;
+    }
+
+    .checkout {
+
+      width: 100%;
+
+      border: none;
+
+      background: var(--green);
+
+      color: white;
+
+      padding: 16px;
+
+      border-radius: 12px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: .3s;
+    }
+
+    .checkout:hover {
+
+      background: var(--red);
+
+      transform: translateY(-3px);
+    }
+
+
+    /* ================= MODAL ================= */
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0, 0, 0, .6);
+
+      backdrop-filter: blur(7px);
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 20px;
+
+      z-index: 3000;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: .3s;
+    }
+
+    .modal.show {
+
+      opacity: 1;
+
+      pointer-events: auto;
+    }
+
+    .modal-box {
+
+      width: min(550px, 100%);
+
+      max-height: 90vh;
+
+      overflow: auto;
+
+      background: var(--card);
+
+      color: var(--text);
+
+      padding: 30px;
+
+      border-radius: 24px;
+
+      transform: scale(.8);
+
+      transition: .4s;
+    }
+
+    .modal.show .modal-box {
+
+      transform: scale(1);
+    }
+
+    .form-group {
+
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+
+      width: 100%;
+
+      padding: 14px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      background: var(--bg);
+
+      color: var(--text);
+
+      font-family: inherit;
+    }
+
+    .modal-buttons {
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+    .modal-buttons button {
+
+      flex: 1;
+    }
+
+
+    /* SUCCESS */
+
+    .success {
+
+      text-align: center;
+
+      padding: 20px;
+    }
+
+    .success-icon {
+
+      width: 80px;
+
+      height: 80px;
+
+      margin: auto;
+
+      border-radius: 50%;
+
+      background: rgba(7, 131, 63, .15);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 40px;
+
+      animation: pop .6s ease;
+    }
+
+
+    /* ================= ANIMATIONS ================= */
+
+    @keyframes float {
+
+      0%,
+      100% {
+
+        transform: translateY(0);
+      }
+
+      50% {
+
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes slideRight {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateX(-50px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes foodAppear {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pop {
+
+      0% {
+
+        transform: scale(0);
+      }
+
+      80% {
+
+        transform: scale(1.15);
+      }
+
+      100% {
+
+        transform: scale(1);
+      }
+    }
+
+    .reveal {
+
+      opacity: 0;
+
+      transform: translateY(40px);
+
+      transition: 1s;
+    }
+
+    .reveal.visible {
+
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:850px) {
+
+      .nav-links {
+
+        position: absolute;
+
+        top: 75px;
+
+        left: 0;
+
+        width: 100%;
+
+        background: var(--card);
+
+        flex-direction: column;
+
+        padding: 25px;
+
+        transform: translateY(-150%);
+
+        transition: .4s;
+      }
+
+      .nav-links.open {
+
+        transform: translateY(0);
+      }
+
+      .menu-btn {
+
+        display: block;
+      }
+
+      .hero {
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        padding-top: 120px;
+      }
+
+      .hero p {
+
+        margin: auto;
+      }
+
+      .hero-buttons {
+
+        justify-content: center;
+      }
+
+      .food-circle {
+
+        width: 350px;
+
+        height: 350px;
+      }
+
+      .features {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .footer-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media(max-width:600px) {
+
+      .navbar {
+
+        padding: 0 4%;
+      }
+
+      .nav-actions {
+
+        gap: 5px;
+      }
+
+      .cart-button {
+
+        padding: 9px 11px;
+      }
+
+      .hero h1 {
+
+        font-size: 45px;
+      }
+
+      .food-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+      }
+
+      .food-img {
+
+        width: 100%;
+
+        height: 220px;
+      }
+
+      .food-info {
+
+        padding: 5px;
+      }
+
+      .features {
+
+        grid-template-columns: 1fr;
+      }
+
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav class="navbar">
+
+    <a href="#" class="logo">
+
+      <div class="logo-box">
+
+        <span>KD</span>
+
+      </div>
+
+      <div class="logo-text">
+
+        K<span>D</span>'s Place
+
+      </div>
+
+    </a>
+
+
+    <div class="nav-links" id="navLinks">
+
+      <a href="#home">Home</a>
+
+      <a href="#menu">Menu</a>
+
+      <a href="#about">About</a>
+
+      <a href="#contact">Contact</a>
+
+    </div>
+
+
+    <div class="nav-actions">
+
+      <button class="mode-toggle" onclick="toggleMode()" id="modeButton">
+
+        🌙
+
+      </button>
+
+
+      <button class="cart-button" onclick="openCart()">
+
+        🛒
+
+        Cart
+
+        <span class="cart-count" id="cartCount">
+
+          0
+
+        </span>
+
+      </button>
+
+
+      <button class="menu-btn" onclick="toggleMenu()">
+
+        ☰
+
+      </button>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero" id="home">
+
+
+    <div class="hero-text">
+
+      <div class="badge">
+
+        🍴 IKORODU'S FOOD SPOT
+
+      </div>
+
+
+      <h1>
+
+        Good Food.<br>
+
+        Good Mood.<br>
+
+        <span>Good</span>
+
+        <strong> Vibes.</strong>
+
+      </h1>
+
+
+      <p>
+
+        Welcome to KD's Place — serving delicious meals,
+        fresh pastries and refreshing drinks for the people
+        of Ikorodu.
+
+      </p>
+
+
+      <div class="hero-buttons">
+
+        <a href="#menu" class="primary-btn">
+
+          Order Now 🍽️
+
+        </a>
+
+
+        <a href="#about" class="secondary-btn">
+
+          Explore KD's
+
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-image">
+
+      <div class="food-circle">
+
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85" alt="Food">
+
+      </div>
+
+
+      <div class="floating-card card-one">
+
+        🔥 Fresh & Hot
+
+      </div>
+
+
+      <div class="floating-card card-two">
+
+        ⭐ Customer Favourite
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= MENU ================= -->
+
+  <section class="section reveal" id="menu">
+
+
+    <div class="section-heading">
+
+      <h2>
+
+        What are you craving? 👀
+
+      </h2>
+
+      <p>
+
+        Scroll down and pick your food.
+
+      </p>
+
+    </div>
+
+
+    <div class="search-area">
+
+      <input class="search" id="searchInput" placeholder="🔎 Search food..." oninput="searchFood()">
+
+    </div>
+
+
+    <div class="categories">
+
+      <button class="category active" onclick="filterCategory('all',this)">
+
+        All
+
+      </button>
+
+      <button class="category" onclick="filterCategory('rice',this)">
+
+        🍚 Rice
+
+      </button>
+
+      <button class="category" onclick="filterCategory('chicken',this)">
+
+        🍗 Chicken
+
+      </button>
+
+      <button class="category" onclick="filterCategory('snacks',this)">
+
+        🥐 Snacks
+
+      </button>
+
+      <button class="category" onclick="filterCategory('drinks',this)">
+
+        🥤 Drinks
+
+      </button>
+
+      <button class="category" onclick="filterCategory('fast',this)">
+
+        🍔 Fast Food
+
+      </button>
+
+    </div>
+
+
+    <!-- VERTICAL MENU -->
+
+    <div class="food-container" id="foodContainer">
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= WHY KD ================= -->
+
+  <section class="section reveal" id="about">
+
+
+    <div class="section-heading">
+
+      <h2>
+
+        Why KD's? ❤️
+
+      </h2>
+
+      <p>
+
+        Good food. Good service. Good vibes.
+
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+      <div class="feature">
+
+        <div class="feature-image">
+
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=300&q=80">
+
+        </div>
+
+        <h3>
+
+          Fresh Meals
+
+        </h3>
+
+        <p>
+
+          Freshly prepared meals made with quality ingredients.
+
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-image">
+
+          <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=300&q=80">
+
+        </div>
+
+        <h3>
+
+          Easy Ordering
+
+        </h3>
+
+        <p>
+
+          Choose your food and order without stress.
+
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-image">
+
+          <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=300&q=80">
+
+        </div>
+
+        <h3>
+
+          Fast Delivery
+
+        </h3>
+
+        <p>
+
+          Get your favourite meals delivered to you.
+
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-image">
+
+          <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=300&q=80">
+
+        </div>
+
+        <h3>
+
+          Good Vibes
+
+        </h3>
+
+        <p>
+
+          A food spot made for friends and family.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer id="contact">
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h2>KD's Place</h2>
+
+        <p>
+
+          Delicious meals, pastries and drinks
+          serving the Ikorodu community.
+
+        </p>
+
+        <br>
+
+        <p>
+
+          📍 Ebute, Police Post, Opp. St Magareth,
+          Ikorodu, Lagos.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>Quick Links</h3>
+
+        <a href="#home">Home</a>
+
+        <a href="#menu">Menu</a>
+
+        <a href="#about">About</a>
+
+      </div>
+
+
+      <div>
+
+        <h3>Contact</h3>
+
+        <a href="tel:+2349034188782">
+
+          📞 0903 418 8782
+
+        </a>
+
+        <a href="https://wa.me/2349034188782">
+
+          💬 WhatsApp
+
+        </a>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+  <!-- ================= CART ================= -->
+
+  <div class="cart-overlay" id="cartOverlay">
+
+
+    <div class="cart-panel">
+
+
+      <div class="cart-header">
+
+        <h2>Your Cart 🛒</h2>
+
+        <button class="close-cart" onclick="closeCart()">
+
+          ×
+
+        </button>
+
+      </div>
+
+
+      <div class="cart-items" id="cartItems">
+
+      </div>
+
+
+      <div class="cart-bottom">
+
+        <div class="total-row">
+
+          <span>Total</span>
+
+          <span id="cartTotal">
+
+            ₦0
+
+          </span>
+
+        </div>
+
+
+        <button class="checkout" onclick="openCheckout()">
+
+          Proceed to Checkout →
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= CHECKOUT ================= -->
+
+  <div class="modal" id="checkoutModal">
+
+
+    <div class="modal-box" id="checkoutBox">
+
+
+      <h2>
+
+        Complete Your Order 🍽️
+
+      </h2>
+
+
+      <form id="checkoutForm">
+
+
+        <div class="form-group">
+
+          <label>Name</label>
+
+          <input id="customerName" required placeholder="Your name">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Phone</label>
+
+          <input id="customerPhone" required placeholder="08012345678">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Delivery Address</label>
+
+          <textarea id="customerAddress" rows="3" required placeholder="Your address">
+
+</textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>Order Type</label>
+
+          <select id="orderType">
+
+            <option>Delivery</option>
+
+            <option>Pickup</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="modal-buttons">
+
+          <button type="button" class="secondary-btn" onclick="closeCheckout()">
+
+            Cancel
+
+          </button>
+
+
+          <button type="submit" class="primary-btn">
+
+            Place Order
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+
+    /* ================= FOOD DATA ================= */
+
+    const foods = [
+
+      {
+        id: 1,
+        name: "Jollof Rice & Chicken",
+        price: 3500,
+        category: "rice",
+        image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=700&q=80",
+        description: "Smoky Nigerian jollof rice with juicy chicken."
+      },
+
+      {
+        id: 2,
+        name: "Fried Rice & Chicken",
+        price: 4000,
+        category: "rice",
+        image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80",
+        description: "Delicious fried rice served with chicken."
+      },
+
+      {
+        id: 3,
+        name: "Peppered Chicken",
+        price: 3000,
+        category: "chicken",
+        image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80",
+        description: "Spicy peppered chicken packed with flavour."
+      },
+
+      {
+        id: 4,
+        name: "Chicken & Chips",
+        price: 4500,
+        category: "fast",
+        image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=700&q=80",
+        description: "Crispy chicken served with golden chips."
+      },
+
+      {
+        id: 5,
+        name: "Burger",
+        price: 3500,
+        category: "fast",
+        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80",
+        description: "Loaded burger with fresh toppings."
+      },
+
+      {
+        id: 6,
+        name: "Meat Pie",
+        price: 1000,
+        category: "snacks",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=700&q=80",
+        description: "Freshly baked meat pie."
+      },
+
+      {
+        id: 7,
+        name: "Sausage Roll",
+        price: 800,
+        category: "snacks",
+        image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80",
+        description: "Crispy sausage roll."
+      },
+
+      {
+        id: 8,
+        name: "Chapman",
+        price: 1500,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=700&q=80",
+        description: "Classic refreshing Chapman."
+      },
+
+      {
+        id: 9,
+        name: "Soft Drink",
+        price: 800,
+        category: "drinks",
+        image: "https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=700&q=80",
+        description: "Ice cold refreshing drink."
+      },
+
+      {
+        id: 10,
+        name: "Jollof Rice & Beef",
+        price: 3000,
+        category: "rice",
+        image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80",
+        description: "Classic jollof rice with tasty beef."
+      }
+
+    ];
+
+
+    /* ================= CART ================= */
+
+    let cart =
+      JSON.parse(
+        localStorage.getItem("kdCart")
+      ) || [];
+
+
+    /* ================= DISPLAY ================= */
+
+    function displayFoods(list = foods) {
+
+      const container =
+        document.getElementById(
+          "foodContainer"
+        );
+
+      container.innerHTML = "";
+
+
+      if (list.length === 0) {
+
+        container.innerHTML = `
+
+<div style="
+padding:30px;
+text-align:center;
+background:var(--card);
+border-radius:20px;
+">
+
+<h3>No food found 😭</h3>
+
+<p style="color:var(--muted)">
+Try another search.
+</p>
+
+</div>
+
+`;
+
+        return;
+
+      }
+
+
+      list.forEach(food => {
+
+        const card =
+          document.createElement("div");
+
+        card.className = "food-card";
+
+
+        card.innerHTML = `
+
+<div class="food-img">
+
+<img
+src="${food.image}"
+alt="${food.name}">
+
+<button
+class="favorite"
+onclick="favoriteFood(this)">
+
+♡
+</button>
+
+</div>
+
+
+<div class="food-info">
+
+<h3>
+
+${food.name}
+
+</h3>
+
+<p>
+
+${food.description}
+
+</p>
+
+
+<div class="food-bottom">
+
+<span class="price">
+
+₦${food.price.toLocaleString()}
+
+</span>
+
+
+<button
+class="add-btn"
+onclick="addToCart(${food.id})">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+
+        container.appendChild(card);
+
+      });
+
+    }
+
+
+    /* ================= ADD ================= */
+
+    function addToCart(id) {
+
+      const food =
+        foods.find(
+          item => item.id === id
+        );
+
+      const existing =
+        cart.find(
+          item => item.id === id
+        );
+
+
+      if (existing) {
+
+        existing.quantity++;
+
+      } else {
+
+        cart.push({
+
+          ...food,
+
+          quantity: 1
+
+        });
+
+      }
+
+
+      saveCart();
+
+      openCart();
+
+    }
+
+
+    /* ================= SAVE ================= */
+
+    function saveCart() {
+
+      localStorage.setItem(
+        "kdCart",
+        JSON.stringify(cart)
+      );
+
+      updateCart();
+
+    }
+
+
+    /* ================= UPDATE ================= */
+
+    function updateCart() {
+
+      const count =
+        cart.reduce(
+          (total, item) =>
+            total + item.quantity,
+          0
+        );
+
+      document.getElementById(
+        "cartCount"
+      ).textContent = count;
+
+      renderCart();
+
+    }
+
+
+    /* ================= RENDER ================= */
+
+    function renderCart() {
+
+      const container =
+        document.getElementById(
+          "cartItems"
+        );
+
+
+      if (cart.length === 0) {
+
+        container.innerHTML = `
+
+<div style="
+text-align:center;
+padding:50px 20px;
+">
+
+<div style="font-size:50px">
+
+🛒
+
+</div>
+
+<h3>
+Your cart is empty
+</h3>
+
+<p style="color:var(--muted)">
+Add some food first.
+</p>
+
+</div>
+
+`;
+
+        document.getElementById(
+          "cartTotal"
+        ).textContent = "₦0";
+
+        return;
+
+      }
+
+
+      container.innerHTML = "";
+
+      let total = 0;
+
+
+      cart.forEach(item => {
+
+        total +=
+          item.price *
+          item.quantity;
+
+
+        const div =
+          document.createElement("div");
+
+        div.className = "cart-item";
+
+
+        div.innerHTML = `
+
+<img
+src="${item.image}">
+
+
+<div class="cart-item-info">
+
+<h4>
+${item.name}
+</h4>
+
+<p>
+
+₦${(
+            item.price *
+            item.quantity
+          ).toLocaleString()}
+
+</p>
+
+
+<div class="qty">
+
+<button
+onclick="changeQuantity(${item.id},-1)">
+
+−
+
+</button>
+
+<span>
+
+${item.quantity}
+
+</span>
+
+<button
+onclick="changeQuantity(${item.id},1)">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+
+<button
+class="remove"
+onclick="removeFromCart(${item.id})">
+
+🗑️
+
+</button>
+
+`;
+
+
+        container.appendChild(div);
+
+      });
+
+
+      document.getElementById(
+        "cartTotal"
+      ).textContent =
+        "₦" + total.toLocaleString();
+
+    }
+
+
+    /* ================= QUANTITY ================= */
+
+    function changeQuantity(id, amount) {
+
+      const item =
+        cart.find(
+          item => item.id === id
+        );
+
+      if (!item) return;
+
+
+      item.quantity += amount;
+
+
+      if (item.quantity <= 0) {
+
+        cart =
+          cart.filter(
+            item => item.id !== id
+          );
+
+      }
+
+
+      saveCart();
+
+    }
+
+
+    /* ================= REMOVE ================= */
+
+    function removeFromCart(id) {
+
+      cart =
+        cart.filter(
+          item => item.id !== id
+        );
+
+      saveCart();
+
+    }
+
+
+    /* ================= CART ================= */
+
+    function openCart() {
+
+      document
+        .getElementById("cartOverlay")
+        .classList.add("open");
+
+    }
+
+    function closeCart() {
+
+      document
+        .getElementById("cartOverlay")
+        .classList.remove("open");
+
+    }
+
+
+    /* ================= CATEGORY ================= */
+
+    function filterCategory(category, button) {
+
+      document
+        .querySelectorAll(".category")
+        .forEach(
+          btn => btn.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+
+      const filtered =
+        category === "all"
+          ?
+          foods
+          :
+          foods.filter(
+            food => food.category === category
+          );
+
+
+      displayFoods(filtered);
+
+    }
+
+
+    /* ================= SEARCH ================= */
+
+    function searchFood() {
+
+      const value =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+
+      const filtered =
+        foods.filter(
+          food =>
+
+            food.name
+              .toLowerCase()
+              .includes(value)
+
+            ||
+
+            food.description
+              .toLowerCase()
+              .includes(value)
+
+        );
+
+
+      displayFoods(filtered);
+
+    }
+
+
+    /* ================= FAVORITE ================= */
+
+    function favoriteFood(button) {
+
+      if (
+        button.textContent === "♡"
+      ) {
+
+        button.textContent = "♥";
+
+        button.style.color = "red";
+
+      } else {
+
+        button.textContent = "♡";
+
+        button.style.color = "";
+
+      }
+
+    }
+
+
+    /* ================= MOBILE MENU ================= */
+
+    function toggleMenu() {
+
+      document
+        .getElementById("navLinks")
+        .classList.toggle("open");
+
+    }
+
+
+    /* ================= DARK MODE ================= */
+
+    function toggleMode() {
+
+      document
+        .body
+        .classList
+        .toggle("dark");
+
+
+      const dark =
+        document.body.classList.contains(
+          "dark"
+        );
+
+
+      document.getElementById(
+        "modeButton"
+      ).textContent =
+        dark ? "☀️" : "🌙";
+
+
+      localStorage.setItem(
+        "kdDarkMode",
+        dark
+      );
+
+    }
+
+
+    /* LOAD DARK MODE */
+
+    if (
+      localStorage.getItem(
+        "kdDarkMode"
+      ) === "true"
+    ) {
+
+      document.body.classList.add("dark");
+
+      document.getElementById(
+        "modeButton"
+      ).textContent = "☀️";
+
+    }
+
+
+    /* ================= CHECKOUT ================= */
+
+    function openCheckout() {
+
+      if (cart.length === 0) {
+
+        alert(
+          "Your cart is empty 😭"
+        );
+
+        return;
+
+      }
+
+
+      closeCart();
+
+      document
+        .getElementById("checkoutModal")
+        .classList
+        .add("show");
+
+    }
+
+
+    function closeCheckout() {
+
+      document
+        .getElementById("checkoutModal")
+        .classList
+        .remove("show");
+
+    }
+
+
+    /* ================= ORDER ================= */
+
+    document
+      .getElementById("checkoutForm")
+      .addEventListener(
+        "submit",
+        function (e) {
+
+          e.preventDefault();
+
+
+          const name =
+            document.getElementById(
+              "customerName"
+            ).value;
+
+
+          const phone =
+            document.getElementById(
+              "customerPhone"
+            ).value;
+
+
+          const address =
+            document.getElementById(
+              "customerAddress"
+            ).value;
+
+
+          const type =
+            document.getElementById(
+              "orderType"
+            ).value;
+
+
+          let message =
+            `Hello KD's Place 👋%0A%0A`;
+
+          message +=
+            `I want to place an order.%0A%0A`;
+
+          message +=
+            `Name: ${name}%0A`;
+
+          message +=
+            `Phone: ${phone}%0A`;
+
+          message +=
+            `Order Type: ${type}%0A`;
+
+          message +=
+            `Address: ${address}%0A%0A`;
+
+          message +=
+            `*ORDER:*%0A`;
+
+
+          let total = 0;
+
+
+          cart.forEach(item => {
+
+            message +=
+              `${item.name} x${item.quantity} - ₦${(
+                item.price *
+                item.quantity
+              ).toLocaleString()}%0A`;
+
+            total +=
+              item.price *
+              item.quantity;
+
+          });
+
+
+          message +=
+            `%0A*Total: ₦${total.toLocaleString()}*`;
+
+
+          document.getElementById(
+            "checkoutBox"
+          ).innerHTML = `
+
+<div class="success">
+
+<div class="success-icon">
+
+✓
+
+</div>
+
+
+<h2 style="margin-top:20px">
+
+Order Ready! 🎉
+
+</h2>
+
+
+<p style="
+color:var(--muted);
+margin:15px 0;
+">
+
+Your order has been prepared.
+Send it to KD's Place on WhatsApp.
+
+</p>
+
+
+<a
+
+href="https://wa.me/2349034188782?text=${message}"
+
+target="_blank"
+
+class="primary-btn"
+
+style="
+display:block;
+text-align:center;
+">
+
+Send Order 💬
+
+</a>
+
+
+<br>
+
+
+<button
+
+class="secondary-btn"
+
+onclick="finishOrder()"
+
+style="width:100%">
+
+Done
+
+</button>
+
+</div>
+
+`;
+
+        });
+
+
+    /* ================= FINISH ================= */
+
+    function finishOrder() {
+
+      cart = [];
+
+      saveCart();
+
+      location.reload();
+
+    }
+
+
+    /* ================= SCROLL REVEAL ================= */
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              entry.target
+                .classList
+                .add("visible");
+
+            }
+
+          });
+
+        },
+        {
+          threshold: .15
+        }
+      );
+
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(
+        el => observer.observe(el)
+      );
+
+
+    /* ================= START ================= */
+
+    displayFoods();
+
+    updateCart();
+
+  </script>
+
+</body>
+
+</html>
